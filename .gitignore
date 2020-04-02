@@ -1,0 +1,5 @@
+*.swp
+*~
+*.save
+ecdsa-hostkey
+ecdsa-hostkey.pub
