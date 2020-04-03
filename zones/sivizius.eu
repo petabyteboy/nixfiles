@@ -1,15 +1,22 @@
 $ORIGIN   sivizius.eu.
 $TTL      3600
-@   SOA   ns.sivizius.eu. dns.sivizius.eu.  (
-            2020040300  ; serial: YYYYMMDDHH
-            1d          ; refresh
-            2h          ; retry
-            4w          ; expire
-            1h          ; minimum TTL
-          )
-    MX    10  mail.sivizius.eu.
-    CAA   0 issue "letsencrypt.org"
-    AAAA  2a01:4f9:c010:6bf5::23
-    A     95.217.131.201
+@     A     95.217.131.201
+      AAAA  2a01:4f9:c010:6bf5::23
+      CAA   0 issue "letsencrypt.org"
+      MX    10  mail.sivizius.eu.
+      NS    ns1.sivizius.eu.
+      NS    ns1.pbb.lc.
+      NS    ns2.pbb.lc.
+      NS    ns3.pbb.lc.
+      SOA   ns.sivizius.eu. dns.sivizius.eu.  (
+              2020040300  ; serial: YYYYMMDDHH
+              1d          ; refresh
+              2h          ; retry
+              4w          ; expire
+              1h          ; minimum TTL
+            )
 
-*   CNAME @
+*     CNAME @
+
+ns1   A     95.217.131.201
+      AAAA  2a01:4f9:c010:6bf5::23
