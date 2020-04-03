@@ -1,5 +1,5 @@
 {
-  domainName                            =   "sivizius.eu";
+  domain                                =   "sivizius.eu";
   hostName                              =   "aleph";
   userName                              =   "sivizius";
 }

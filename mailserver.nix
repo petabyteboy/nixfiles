@@ -1,5 +1,6 @@
 let
-  this                                  =   import ./this.nix;
+  this                                  =   import  ./this.nix;
+  mailAccounts                          =   import  ./mailAccounts.nix;
 in
   { ... }:
   {
@@ -17,17 +18,11 @@ in
     mailserver                          =
     {
       enable                            =   true;
-      fqdn                              =   "mail.${this.domainName}";
+      fqdn                              =   "mail.${this.domain}";
       domains                           =
       [
-        this.domainName
+        this.domain
       ];
-      loginAccounts                     =
-      {
-        "sivizius@${this.domainName}"   =
-        {
-          hashedPassword                =   "…";
-        };
-      };
+      loginAccounts                     =   mailAccounts;
     };
   }

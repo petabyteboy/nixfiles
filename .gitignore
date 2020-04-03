@@ -3,3 +3,4 @@
 *.save
 ecdsa-hostkey
 ecdsa-hostkey.pub
+mailAccounts.nix
