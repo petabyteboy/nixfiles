@@ -2,9 +2,7 @@ let
   this                                  =   import  ./this.nix;
   master                                =   true;
   masters                               =   [ ];
-  slaves                                =
-  [
-  ];
+  slaves                                =   [ ];
 in
   { ... }:
   {
@@ -23,19 +21,13 @@ in
       };
       hostName                          =   this.hostName;
       interfaces.ens3.useDHCP           =   true;
-      nameservers                       =   [ "127.0.0.1" ];
-      useDHCP                           =   false;
     };
 
     services.bind                       =
     {
       enable                            =   true;
-      forwarders                        =
-      [
-      ];
-      cacheNetworks                     =
-      [
-      ];
+      forwarders                        =   [ ];
+      cacheNetworks                     =   [ ];
       zones                             =
       [
         {
