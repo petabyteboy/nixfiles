@@ -7,13 +7,15 @@ in
     {
       nginx                             =
       {
+        enable                          =   true;
         virtualHosts                    =
         {
           "${this.domain}"              =
           {
-            root                        =   pkgs.stdenv.mkDerivation
+            enableACME                  =   true;
+            "/"                         =
             {
-              src                       =   fetchGit "https://github.com/sivizius/blog/";
+              index                     =   "index.html";
             };
           };
         };

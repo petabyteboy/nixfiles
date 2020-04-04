@@ -35,14 +35,17 @@ in
 
       interfaces                        =
       {
-        ens3.useDHCP                    =   true;
-        ens3.ipv6.addresses             =
-        [
-          {
-            address                     =   "2a01:4f9:c010:6bf5::23";
-            prefixLength                =   64;
-          }
-        ];
+        ens3                            =
+        {
+          ipv6.addresses                =
+          [
+            {
+              address                   =   "2a01:4f9:c010:6bf5::23";
+              prefixLength              =   64;
+            }
+          ];
+          useDHCP                       =   true;
+        };
       };
 
       useDHCP                           =   false;
@@ -51,8 +54,24 @@ in
     services.bind                       =
     {
       enable                            =   true;
-      forwarders                        =   [ ];
-      cacheNetworks                     =   [ ];
+      forwarders                        =
+      [
+        "2a01:4f8:0:1::add:1010"
+        "2a01:4f8:0:1::add:9999"
+        "2a01:4f8:0:1::add:9898"
+        "2001:4860:4860::8888"
+        "2001:4860:4860::8844"
+        "213.133.98.98"
+        "213.133.99.99"
+        "213.133.100.100"
+        "8.8.8.8"
+        "8.8.4.4"
+      ];
+      cacheNetworks                     =
+      [
+        "127.0.0.0/8"
+        "::/64"
+      ];
       zones                             =
       [
         {

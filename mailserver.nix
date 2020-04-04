@@ -23,6 +23,7 @@ in
       [
         this.domain
       ];
+      localDnsResolver                  =   false;
       loginAccounts                     =   mailAccounts;
     };
   }
