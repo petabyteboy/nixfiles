@@ -8,9 +8,7 @@ in
       ./boot.nix
       ./environment.nix
       ./hardware-configuration.nix
-      ./mailserver.nix
       ./networking.nix
-#      ./nginx.nix
       ./packages.nix
       ./programs.nix
       ./sivizius.nix
