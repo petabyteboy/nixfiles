@@ -28,6 +28,8 @@
     shellInit                           =
     ''
       mkdir -p ~/.nano/backups
+      eval "$(ssh-agent -s)"
+      export TERM=xterm
     '';
   };
 
@@ -37,4 +39,9 @@
   };
 
   time.timeZone                         =   "Europe/Berlin";
+
+  users.users.root                      =
+  {
+    shell                               =   pkgs.zsh;
+  };
 }

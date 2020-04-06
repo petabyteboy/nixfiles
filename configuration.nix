@@ -16,7 +16,5 @@ in
       ./sivizius.nix
     ];
 
-    security.acme.server                =   "https://acme-staging-v02.api.letsencrypt.org/directory";
-
     system.stateVersion                 =   "20.03";
   }

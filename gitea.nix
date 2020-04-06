@@ -8,7 +8,7 @@ in
       gitea                             =
       {
         appName                         =   "_sivizius’ Gitea";
-        cookieSecure                    =   false;                              # change to true if possible
+        cookieSecure                    =   true;
         disableRegistration             =   true;
         domain                          =   "git.${this.domain}";
         enable                          =   true;
@@ -21,8 +21,8 @@ in
       {
         "git.${this.domain}"            =
         {
-          enableACME                    =   false;                              # change to true if possible
-          forceSSL                      =   false;                              # change to true if possible
+          enableACME                    =   true;
+          forceSSL                      =   true;
           locations."/".proxyPass       =   "http://127.0.0.1:3000";
         };
       };

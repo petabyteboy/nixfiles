@@ -23,8 +23,9 @@ in
       {
         allowedTCPPorts                 =
         [
-          80
           53    # dns
+          80    # http
+          443   # tls
         ];
         allowedUDPPorts                 =
         [
@@ -81,6 +82,14 @@ in
           inherit master masters slaves;
         }
       ];
+    };
+
+    security.acme                       =
+    {
+      acceptTerms                       =   true;
+      email                             =   "cert@sivizius.eu";
+      # Remove This to Use Real ACME-Server
+#      server                            =   "https://acme-staging-v02.api.letsencrypt.org/directory";
     };
 
     services.openssh.enable             =   true;
