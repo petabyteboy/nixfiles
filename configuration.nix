@@ -7,8 +7,10 @@ in
     [
       ./boot.nix
       ./environment.nix
+      ./gitea.nix
       ./hardware-configuration.nix
       ./networking.nix
+      ./nginx.nix
       ./packages.nix
       ./programs.nix
       ./sivizius.nix

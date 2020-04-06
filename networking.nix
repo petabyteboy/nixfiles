@@ -23,6 +23,7 @@ in
       {
         allowedTCPPorts                 =
         [
+          80
           53    # dns
         ];
         allowedUDPPorts                 =
@@ -81,4 +82,6 @@ in
         }
       ];
     };
+
+    services.openssh.enable             =   true;
   }

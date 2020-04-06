@@ -3,7 +3,7 @@ let
 in
   { config, ... }:
   {
-    services
+    services                            =
     {
       gitea                             =
       {
