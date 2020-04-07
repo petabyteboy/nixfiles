@@ -9,9 +9,22 @@ in
       {
         appName                         =   "_sivizius’ Gitea";
         cookieSecure                    =   true;
+        database                        =
+        {
+          type                          =   "postgres";
+          name                          =   "gitea";
+          user                          =   "gitea";
+        };
         disableRegistration             =   true;
         domain                          =   "git.${this.domain}";
         enable                          =   true;
+        extraConfig                     =
+        ''
+          [server]
+          START_SSH_SERVER              =   true
+          BUILTIN_SSH_SERVER_USER       =   gitea
+          SSH_LISTEN_PORT               =   2222
+        '';
         httpAddress                     =   "127.0.0.1";
         log.level                       =   "Warn";
         rootUrl                         =   "https://git.${this.domain}/";
