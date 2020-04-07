@@ -10,11 +10,11 @@ in
         enable                          =   true;
         virtualHosts                    =
         {
-          "${this.domain}"              =
+          "blog.${this.domain}"         =
           {
             enableACME                  =   true;
             forceSSL                    =   true;
-            location."/".root           =   "/var/www/";
+            location."/".root           =   "/var/blog/";
           };
         };
       };

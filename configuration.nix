@@ -5,6 +5,7 @@ in
   {
     imports                             =
     [
+      ./blog.nix
       ./boot.nix
       ./environment.nix
       ./gitea.nix
