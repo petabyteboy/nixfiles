@@ -18,7 +18,6 @@ in
     mailserver                          =
     {
       certificateScheme                 =   3;
-      debug                             =   true;
       domains                           =   [ this.domain ];
       enable                            =   true;
       enableImap                        =   true;
