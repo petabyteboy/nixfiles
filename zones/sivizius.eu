@@ -1,24 +1,37 @@
 $ORIGIN   sivizius.eu.
 $TTL      3600
-@     A     95.217.131.201
-      AAAA  2a01:4f9:c010:6bf5::23
-      CAA   0 issue "letsencrypt.org"
-      MX    10  mail.sivizius.eu.
-      NS    ns1.sivizius.eu.
-      NS    ns1.pbb.lc.
-      NS    ns2.pbb.lc.
-      NS    ns3.pbb.lc.
-      SOA   (
-              ns1.sivizius.eu.  ; primary dns-server
-              dns.sivizius.eu.  ; e-mail
-              2020040401        ; serial: YYYYMMDDxx
-              1d                ; refresh
-              2h                ; retry
-              4w                ; expire
-              1h                ; minimum TTL
-            )
+@           A     95.217.131.201            ; IPv4
+            AAAA  2a01:4f9:c010:6bf5::23    ; IPv6
+            CAA   (
+                    0                       ; flags
+                    issue "letsencrypt.org" ; authority
+                  )
+            MX    (
+                    10                      ; priority
+                    mail.sivizius.eu.       ; domain of webserver
+                  )
+            NS    ns1.sivizius.eu.          ; primary
+            NS    ns1.pbb.lc.               ; secondaries
+            NS    ns2.pbb.lc.
+            NS    ns3.pbb.lc.
+            SOA   (
+                    ns1.sivizius.eu.        ; primary dns-server
+                    dns.sivizius.eu.        ; e-mail
+                    2020040802              ; serial: YYYYMMDDxx
+                    1d                      ; refresh
+                    2h                      ; retry
+                    4w                      ; expire
+                    1h                      ; minimum TTL
+                  )
+            TXT   "v=spf1 ipv4:95.217.131.201 ipv6:2a01:4f9:c010:6bf5::23 -all"
 
-*     CNAME @
+mail._dkim  TXT   (
+                    "v=DKIM1; k=rsa;"
+	                  "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDL44g8A5mH06tScjiaiY5UUK14lxiuIefyFhS5+BQFq6oaZEn9xfJQU8R3b+WpGrM3sbBUyl5IziS95x+0LwnAxs9p9mCYm72ffhvhKD5qvR5C3f5vWcWXaGqvZ6xe+vABa0huIfj3laXje3M9muokqDUg3SZN1Ccabznnd8XvoQIDAQAB"
+	                )
+_dmarc      TXT   "v=DMARC1;p=reject;pct=100;ruf=mailto:dmarc@sivizius.eu;adkim=s;aspf=s"
 
-ns1   A     95.217.131.201
-;      AAAA  2a01:4f9:c010:6bf5::23
+ns1         A     95.217.131.201
+            AAAA  2a01:4f9:c010:6bf5::23
+
+*           CNAME @                         ; alias every other subdomain to the default

@@ -6,6 +6,7 @@
     [
       exa
       file
+      fish
       git
       gitlab
       htop

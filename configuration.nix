@@ -10,6 +10,7 @@ in
       ./environment.nix
       ./gitea.nix
       ./hardware-configuration.nix
+      ./mailServer.nix
       ./networking.nix
       ./nginx.nix
       ./packages.nix

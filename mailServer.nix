@@ -17,13 +17,20 @@ in
 
     mailserver                          =
     {
+      certificateScheme                 =   3;
+      debug                             =   true;
+      domains                           =   [ this.domain ];
       enable                            =   true;
+      enableImap                        =   true;
+      enableImapSsl                     =   true;
+      enableManageSieve                 =   true;
+      enablePop3                        =   true;
+      enablePop3Ssl                     =   true;
       fqdn                              =   "mail.${this.domain}";
-      domains                           =
-      [
-        this.domain
-      ];
       localDnsResolver                  =   false;
       loginAccounts                     =   mailAccounts;
+      rejectRecipients                  =   [ ];
+      rejectSender                      =   [ ];
+      virusScanning                     =   false;
     };
   }

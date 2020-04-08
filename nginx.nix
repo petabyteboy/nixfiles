@@ -14,7 +14,7 @@ in
           {
             enableACME                  =   true;
             forceSSL                    =   true;
-            location."/".root           =   "/var/www/";
+            locations."/".root          =   "/var/www/";
           };
         };
       };
