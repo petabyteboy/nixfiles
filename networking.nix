@@ -94,18 +94,35 @@ in
     security.acme                       =
     {
       acceptTerms                       =   true;
-      email                             =   "cert@sivizius.eu";
-      # Remove This to Use Real ACME-Server
-#      server                            =   "https://acme-staging-v02.api.letsencrypt.org/directory";
+      email                             =   "cert@${this.domain}";
     };
 
     services.openssh.enable             =   true;
 
-    systemd.services                    =
+    systemd                             =
     {
-      "acme-sivizius.eu".after          =   [ "bind"  ];
-      "acme-blog.sivizius.eu".after     =   [ "bind"  ];
-      "acme-git.sivizius.eu".after      =   [ "bind"  ];
-      "acme-mail.sivizius.eu".after     =   [ "bind"  ];
+      services                          =
+      {
+        "acme-${this.domain}"           =
+        {
+          after                         =   [ "bind"  ];
+        };
+        "acme-blog.${this.domain}"      =
+        {
+          after                         =   [ "bind"  ];
+        };
+        "acme-git.${this.domain}"       =
+        {
+          after                         =   [ "bind"  ];
+        };
+        "acme-grafana.${this.domain}"   =
+        {
+          after                         =   [ "bind"  ];
+        };
+        "acme-prometheus.${this.domain}"=
+        {
+          after                         =   [ "bind"  ];
+        };
+      };
     };
   }

@@ -15,15 +15,21 @@ in
           name                          =   "gitea";
           user                          =   "gitea";
         };
-        disableRegistration             =   true;
+        disableRegistration             =   false;
         domain                          =   "git.${this.domain}";
         enable                          =   true;
         extraConfig                     =
         ''
+          [metrics]
+          ENABLED                       =   true
+          [picture]
+          DISABLE_GRAVATAR              =   true
           [server]
           START_SSH_SERVER              =   true
           BUILTIN_SSH_SERVER_USER       =   gitea
           SSH_LISTEN_PORT               =   2222
+          [ui]
+          DEFAULT_THEME                 =   arc-green
         '';
         httpAddress                     =   "127.0.0.1";
         log.level                       =   "Warn";
@@ -36,7 +42,7 @@ in
         {
           enableACME                    =   true;
           forceSSL                      =   true;
-          locations."/".proxyPass       =   "http://127.0.0.1:3000";
+          locations."/".proxyPass       =   "http://127.0.0.1:${toString this.ports.gitea}/";
         };
       };
 
@@ -50,7 +56,7 @@ in
             name                        =   "gitea";
             ensurePermissions           =
             {
-              "DATABASE gitea"          = "ALL PRIVILEGES";
+              "DATABASE gitea"          =   "ALL PRIVILEGES";
             };
           }
         ];

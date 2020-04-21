@@ -6,15 +6,12 @@
     [
       exa
       file
-      fish
       git
-      gitlab
       htop
       iftop
       iotop
       iperf
       mtr
-      nginx
       nload
       parallel
       progress

@@ -17,9 +17,9 @@ in
           '';
           ssh                           =
           {
-            authorizedKeys              =   config.users.users."${this.userName}".openssh.authorizedKeys.keys;
+            authorizedKeys              =   [ ( builtins.readFile ./public/user.ssh ) ];
             enable                      =   true;
-            hostKeys                    =   [ ./ecdsa-hostkey ];
+            hostKeys                    =   [ ./secret/hostkey  ];
             port                        =   2222;
           };
         };

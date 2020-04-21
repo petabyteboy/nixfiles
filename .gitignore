@@ -1,7 +1,4 @@
-*.swp
 *~
 *.save
-result
-ecdsa-hostkey
-ecdsa-hostkey.pub
-mailAccounts.nix
+*.swp
+secret/

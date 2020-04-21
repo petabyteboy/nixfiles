@@ -9,13 +9,14 @@ in
       ./boot.nix
       ./environment.nix
       ./gitea.nix
-      ./hardware-configuration.nix
-      ./mailServer.nix
+      ./hardware.nix
+      ./mail.nix
+      ./monitoring.nix
       ./networking.nix
       ./nginx.nix
       ./packages.nix
       ./programs.nix
-      ./sivizius.nix
+      ./users.nix
     ];
 
     system.stateVersion                 =   "20.03";
