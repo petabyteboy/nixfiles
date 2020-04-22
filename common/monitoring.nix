@@ -49,7 +49,7 @@ in
             enableACME                  =   true;
             extraConfig                 =
             ''
-              allow ${this.ipv6range}::/64;
+              allow ${this.ipv6range}:/64;
               allow ${this.ipv4};
               deny all;
             '';
