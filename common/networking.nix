@@ -65,14 +65,13 @@ in
             forceSSL                    =   true;
             locations                   =
             {
-              "/".root                  =   "/var/www/";
               "/metrics/nginx"          =
               {
                 extraConfig             =
                 ''
                   allow ${this.ipv6range}:/64;
                   allow ${this.ipv4};
-                  deny all;
+                  #deny all;
                 '';
                 proxyPass               =   "http://localhost:${toString this.ports.exporters.nginx}/metrics";
               };
@@ -82,7 +81,7 @@ in
                 ''
                   allow ${this.ipv6range}:/64;
                   allow ${this.ipv4};
-                  deny all;
+                  #deny all;
                 '';
                 proxyPass               =   "http://localhost:${toString this.ports.exporters.node}/metrics";
               };

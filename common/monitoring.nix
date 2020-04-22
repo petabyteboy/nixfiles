@@ -16,7 +16,7 @@ in
           dashboards                    =
           [
             {
-              options.path              =   ./dashboards;
+              options.path              =   ../dashboards;
             }
           ];
 
@@ -51,10 +51,17 @@ in
             ''
               allow ${this.ipv6range}:/64;
               allow ${this.ipv4};
-              deny all;
+              #deny all;
             '';
             forceSSL                    =   true;
-            locations."/".proxyPass     =   "http://localhost:${toString this.ports.prometheus}/";
+            locations                   =
+            {
+              "/"                       =
+              {
+                proxyPass               =   "http://localhost:${toString this.ports.prometheus}/";
+                proxyWebsockets         =   true;
+              };
+            };
           };
         };
       };
@@ -80,8 +87,41 @@ in
             port                        =   this.ports.exporters.node;
           };
         };
-        globalConfig.scrape_interval    =   "5s";
-        webExternalUrl                  =   "https://prometheus.${this.domain}/";
+        scrapeConfigs                   =
+        [
+          {
+            job_name                    =   "nginx";
+            metrics_path                =   "/metrics/nginx";
+            scheme                      =   "https";
+            scrape_interval             =   "30s";
+            static_configs              =
+            [
+              {
+                targets                 =
+                [
+                  "aleph.${this.domain}"
+                ];
+              }
+            ];
+          }
+          {
+            job_name                    =   "node";
+            metrics_path                =   "/metrics/node";
+            scheme                      =   "https";
+            scrape_interval             =   "30s";
+            static_configs              =
+            [
+              {
+                targets                 =
+                [
+                  "aleph.${this.domain}"
+                ];
+              }
+            ];
+          }
+        ];
+        #globalConfig.scrape_interval    =   "5s";
+        #webExternalUrl                  =   "https://prometheus.${this.domain}/";
       };
     };
 

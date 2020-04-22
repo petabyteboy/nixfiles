@@ -11,6 +11,21 @@ let
 in
   { ... }:
   {
+    networking                          =
+    {
+      firewall                          =
+      {
+        allowedTCPPorts                 =
+        [
+          53                            # dns
+        ];
+        allowedUDPPorts                 =
+        [
+          53                            # dns
+        ];
+      };
+    };
+
     services.bind                       =
     {
       enable                            =   true;

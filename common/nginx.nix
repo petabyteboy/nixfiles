@@ -28,7 +28,7 @@ in
             default                     "public; max-age=1209600";
           }
           add_header Cache-Control              $cacheable_types;
-          add_header Content-Security-Policy    "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
+          #add_header Content-Security-Policy    "default-src 'self'; frame-ancestors 'none'; object-src 'none'" always;
           add_header Referrer-Policy            "no-referrer-when-downgrade"                                    always;
           add_header Strict-Transport-Security  $hsts_header                                                    always;
           add_header X-Content-Type-Options     "nosniff";
