@@ -36,13 +36,17 @@ in
         rootUrl                         =   "https://git.${this.domain}/";
       };
 
-      nginx.virtualHosts                =
+      nginx                             =
       {
-        "git.${this.domain}"            =
+        virtualHosts                    =
         {
-          enableACME                    =   true;
-          forceSSL                      =   true;
-          locations."/".proxyPass       =   "http://localhost:${toString this.ports.gitea}/";
+          "git.${this.domain}"          =
+          {
+            enableACME                  =   true;
+            extraConfig                 =   config.services.nginx.virtualHosts."${this.domain}".extraConfig;
+            forceSSL                    =   true;
+            locations."/".proxyPass     =   "http://localhost:${toString this.ports.gitea}/";
+          };
         };
       };
 
@@ -58,6 +62,28 @@ in
             {
               "DATABASE gitea"          =   "ALL PRIVILEGES";
             };
+          }
+        ];
+      };
+
+      prometheus                        =
+      {
+        scrapeConfigs                   =
+        [
+          {
+            job_name                    =   "gitea";
+            metrics_path                =   "/metrics";
+            scheme                      =   "https";
+            scrape_interval             =   "30s";
+            static_configs              =
+            [
+              {
+                targets                 =
+                [
+                  "git.${this.domain}"
+                ];
+              }
+            ];
           }
         ];
       };

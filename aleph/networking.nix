@@ -26,35 +26,91 @@ in
       };
     };
 
-    services.bind                       =
+    services                            =
     {
-      enable                            =   true;
-      forwarders                        =
-      [
-        "2a01:4f8:0:1::add:1010"        # Hetzner
-        "2a01:4f8:0:1::add:9999"        # Hetzner
-        "2a01:4f8:0:1::add:9898"        # Hetzner
-        "2001:4860:4860::8888"          # Google
-        "2001:4860:4860::8844"          # Google
-        "213.133.98.98"                 # Hetzner
-        "213.133.99.99"                 # Hetzner
-        "213.133.100.100"               # Hetzner
-        "8.8.8.8"                       # Google
-        "8.8.4.4"                       # Google
-      ];
-      cacheNetworks                     =
-      [
-        "127.0.0.0/8"
-        "::/64"
-      ];
-      zones                             =
-      [
+      bind                              =
+      {
+        enable                            =   true;
+        forwarders                        =
+        [
+          "2a01:4f8:0:1::add:1010"        # Hetzner
+          "2a01:4f8:0:1::add:9999"        # Hetzner
+          "2a01:4f8:0:1::add:9898"        # Hetzner
+          "2001:4860:4860::8888"          # Google
+          "2001:4860:4860::8844"          # Google
+          "213.133.98.98"                 # Hetzner
+          "213.133.99.99"                 # Hetzner
+          "213.133.100.100"               # Hetzner
+          "8.8.8.8"                       # Google
+          "8.8.4.4"                       # Google
+        ];
+        cacheNetworks                     =
+        [
+          "127.0.0.0/8"
+          "::/64"
+        ];
+        zones                             =
+        [
+          {
+            name                          =   this.domain;
+            file                          =   "${./zones}/${this.domain}";
+            inherit master masters slaves;
+          }
+        ];
+      };
+
+      nginx                             =
+      {
+        virtualHosts                    =
         {
-          name                          =   this.domain;
-          file                          =   "${./zones}/${this.domain}";
-          inherit master masters slaves;
-        }
-      ];
+          ${this.hostDomain}            =
+          {
+            locations                   =
+            {
+              "/metrics/bind"           =
+              {
+                extraConfig             =
+                ''
+                  allow ${this.ipv6range}:/64;
+                  allow ${this.ipv4};
+                  deny all;
+                '';
+                proxyPass               =   "http://localhost:${toString this.ports.exporters.bind}/metrics";
+              };
+            };
+          };
+        };
+      };
+
+      prometheus                        =
+      {
+        exporters                       =
+        {
+          bind                          =
+          {
+            enable                      =   true;
+            port                        =   this.ports.exporters.bind;
+          };
+        };
+        scrapeConfigs                   =
+        [
+          {
+            job_name                    =   "bind";
+            metrics_path                =   "/metrics/bind";
+            scheme                      =   "https";
+            scrape_interval             =   "30s";
+            static_configs              =
+            [
+              {
+                targets                 =
+                [
+                  "${this.hostDomain}"
+                ];
+              }
+            ];
+          }
+        ];
+      };
     };
 
     systemd                             =

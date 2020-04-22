@@ -1,7 +1,7 @@
 let
   this                                  =   import  ../this.nix;
 in
-  { ... }:
+  { config, ... }:
   {
     imports                             =
     [
@@ -55,6 +55,23 @@ in
 
     services                            =
     {
+      prometheus                        =
+      {
+        exporters                       =
+        {
+          nginx                         =
+          {
+            enable                      =   true;
+            port                        =   this.ports.exporters.nginx;
+          };
+          node                          =
+          {
+            enable                      =   true;
+            port                        =   this.ports.exporters.node;
+          };
+        };
+      };
+
       nginx                             =
       {
         virtualHosts                    =
@@ -62,6 +79,7 @@ in
           ${this.hostDomain}            =
           {
             enableACME                  =   true;
+            extraConfig                 =   config.services.nginx.virtualHosts."${this.domain}".extraConfig;
             forceSSL                    =   true;
             locations                   =
             {
@@ -71,7 +89,7 @@ in
                 ''
                   allow ${this.ipv6range}:/64;
                   allow ${this.ipv4};
-                  #deny all;
+                  deny all;
                 '';
                 proxyPass               =   "http://localhost:${toString this.ports.exporters.nginx}/metrics";
               };
@@ -81,7 +99,7 @@ in
                 ''
                   allow ${this.ipv6range}:/64;
                   allow ${this.ipv4};
-                  #deny all;
+                  deny all;
                 '';
                 proxyPass               =   "http://localhost:${toString this.ports.exporters.node}/metrics";
               };
@@ -89,6 +107,7 @@ in
           };
         };
       };
+
       openssh.enable                    =   true;
       vnstat.enable                     =   true;
     };

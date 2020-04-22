@@ -7,7 +7,7 @@ in
   {
     hostDomain                          =   "${hostName}.${domain}";
     ipv6                                =   "${ipv6range}:23";
-    inherit domain hostName ipv4 ipv6range;
+    legacyTLS                           =   true;
     ports                               =
     {
       exporters                         =
@@ -21,4 +21,5 @@ in
       prometheus                        =   9090;
     };
     userName                            =   "sivizius";
+    inherit domain hostName ipv4 ipv6range;
   }

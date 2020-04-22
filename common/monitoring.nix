@@ -13,20 +13,20 @@ in
         port                            =   this.ports.grafana;
         provision                       =
         {
-          dashboards                    =
-          [
-            {
-              options.path              =   ../dashboards;
-            }
-          ];
-
+          enable                        =   true;
           datasources                   =
           [
             {
               isDefault                 =   true;
               name                      =   "Prometheus";
               type                      =   "prometheus";
-              url                       =   "http://localhost:${toString this.ports.prometheus}/";
+              url                       =   "https://prometheus.${this.domain}/";
+            }
+          ];
+          dashboards                    =
+          [
+            {
+              options.path              =   ../dashboards;
             }
           ];
         };
@@ -47,17 +47,18 @@ in
           "prometheus.${this.domain}"   =
           {
             enableACME                  =   true;
-            extraConfig                 =
-            ''
-              allow ${this.ipv6range}:/64;
-              allow ${this.ipv4};
-              #deny all;
-            '';
+            extraConfig                 =   config.services.nginx.virtualHosts."${this.domain}".extraConfig;
             forceSSL                    =   true;
             locations                   =
             {
               "/"                       =
               {
+                extraConfig             =
+                ''
+                  allow ${this.ipv6range}:/64;
+                  allow ${this.ipv4};
+                  #deny all;
+                '';
                 proxyPass               =   "http://localhost:${toString this.ports.prometheus}/";
                 proxyWebsockets         =   true;
               };
@@ -69,24 +70,6 @@ in
       prometheus                        =
       {
         enable                          =   true; 
-        exporters                       =
-        {
-          bind                          =
-          {
-            enable                      =   true;
-            port                        =   this.ports.exporters.bind;
-          };
-          nginx                         =
-          {
-            enable                      =   true;
-            port                        =   this.ports.exporters.nginx;
-          };
-          node                          =
-          {
-            enable                      =   true;
-            port                        =   this.ports.exporters.node;
-          };
-        };
         scrapeConfigs                   =
         [
           {
@@ -99,7 +82,7 @@ in
               {
                 targets                 =
                 [
-                  "aleph.${this.domain}"
+                  "${this.hostDomain}"
                 ];
               }
             ];
@@ -114,14 +97,12 @@ in
               {
                 targets                 =
                 [
-                  "aleph.${this.domain}"
+                  "${this.hostDomain}"
                 ];
               }
             ];
           }
         ];
-        #globalConfig.scrape_interval    =   "5s";
-        #webExternalUrl                  =   "https://prometheus.${this.domain}/";
       };
     };
 

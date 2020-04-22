@@ -1,7 +1,7 @@
 let
   this                                  =   import  ../this.nix;
 in
-  { ... }:
+  { config, ... }:
   {
     services                            =
     {
@@ -13,6 +13,7 @@ in
           "blog.${this.domain}"         =
           {
             enableACME                  =   true;
+            extraConfig                 =   config.services.nginx.virtualHosts."${this.domain}".extraConfig;
             forceSSL                    =   true;
             locations."/".root          =   "/var/blog/";
           };
