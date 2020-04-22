@@ -22,6 +22,7 @@ in
         ''
           [metrics]
           ENABLED                       =   true
+          TOKEN                         =   ${  ( builtins.readFile ../secret/gitea.token ) }
           [picture]
           DISABLE_GRAVATAR              =   true
           [server]
@@ -71,6 +72,7 @@ in
         scrapeConfigs                   =
         [
           {
+            bearer_token_file           =   "${ ../secret/gitea.token }";
             job_name                    =   "gitea";
             metrics_path                =   "/metrics";
             scheme                      =   "https";
