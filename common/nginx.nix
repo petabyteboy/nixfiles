@@ -1,5 +1,5 @@
 let
-  this                                  =   import  ./this.nix;
+  this                                  =   import  ../this.nix;
 in
   { ... }:
   {
@@ -41,6 +41,7 @@ in
         recommendedProxySettings        =   true;
         recommendedTlsSettings          =   true;
         sslProtocols                    =   "TLSv1.3";
+        statusPage                      =   true;
         virtualHosts                    =
         {
           "${this.domain}"              =

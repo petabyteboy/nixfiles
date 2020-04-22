@@ -1,5 +1,5 @@
 let
-  this                                  =   import  ./this.nix;
+  this                                  =   import  ../this.nix;
 in
   { config, ... }:
   {
@@ -31,7 +31,7 @@ in
           [ui]
           DEFAULT_THEME                 =   arc-green
         '';
-        httpAddress                     =   "127.0.0.1";
+        httpAddress                     =   "localhost";
         log.level                       =   "Warn";
         rootUrl                         =   "https://git.${this.domain}/";
       };
@@ -42,7 +42,7 @@ in
         {
           enableACME                    =   true;
           forceSSL                      =   true;
-          locations."/".proxyPass       =   "http://127.0.0.1:${toString this.ports.gitea}/";
+          locations."/".proxyPass       =   "http://localhost:${toString this.ports.gitea}/";
         };
       };
 

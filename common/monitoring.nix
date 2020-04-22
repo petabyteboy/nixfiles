@@ -1,5 +1,5 @@
 let
-  this                                  =   import  ./this.nix;
+  this                                  =   import  ../this.nix;
 in
   { config, ... }:
   {
@@ -26,7 +26,7 @@ in
               isDefault                 =   true;
               name                      =   "Prometheus";
               type                      =   "prometheus";
-              url                       =   "http://127.0.0.1:${toString this.ports.prometheus}/";
+              url                       =   "http://localhost:${toString this.ports.prometheus}/";
             }
           ];
         };
@@ -41,15 +41,20 @@ in
           {
             enableACME                  =   true;
             forceSSL                    =   true;
-            locations."/".proxyPass     =   "http://127.0.0.1:${toString this.ports.grafana}/";
+            locations."/".proxyPass     =   "http://localhost:${toString this.ports.grafana}/";
           };
 
           "prometheus.${this.domain}"   =
           {
             enableACME                  =   true;
-            # extraConfig                 =   config.services.nginx.virtualHosts."${config.networking.hostName}.pbb.lc".locations."/node-exporter/metrics".extraConfig;
+            extraConfig                 =
+            ''
+              allow ${this.ipv6range}::/64;
+              allow ${this.ipv4};
+              deny all;
+            '';
             forceSSL                    =   true;
-            locations."/".proxyPass     =   "http://127.0.0.1:${toString this.ports.prometheus}/";
+            locations."/".proxyPass     =   "http://localhost:${toString this.ports.prometheus}/";
           };
         };
       };
@@ -59,10 +64,29 @@ in
         enable                          =   true; 
         exporters                       =
         {
-          bind.enable                   =   true;
+          bind                          =
+          {
+            enable                      =   true;
+            port                        =   this.ports.exporters.bind;
+          };
+          nginx                         =
+          {
+            enable                      =   true;
+            port                        =   this.ports.exporters.nginx;
+          };
+          node                          =
+          {
+            enable                      =   true;
+            port                        =   this.ports.exporters.node;
+          };
         };
         globalConfig.scrape_interval    =   "5s";
         webExternalUrl                  =   "https://prometheus.${this.domain}/";
       };
     };
+
+    services.journald.extraConfig       =
+    ''
+      MaxRetentionSec                   =   "3day"
+    '';
   }

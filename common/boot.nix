@@ -1,5 +1,5 @@
 let
-  this                                  =   import  ./this.nix;
+  this                                  =   import  ../this.nix;
 in
   { config, pkgs, ... }:
   {
@@ -17,9 +17,9 @@ in
           '';
           ssh                           =
           {
-            authorizedKeys              =   [ ( builtins.readFile ./public/user.ssh ) ];
+            authorizedKeys              =   [ ( builtins.readFile ../public/user.ssh  ) ];
             enable                      =   true;
-            hostKeys                    =   [ ./secret/hostkey  ];
+            hostKeys                    =   [ ../secret/hostkey ];
             port                        =   2222;
           };
         };

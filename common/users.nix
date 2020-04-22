@@ -1,5 +1,5 @@
 let
-  this                                  =   import  ./this.nix;
+  this                                  =   import  ../this.nix;
 in
   { pkgs, ... }:
   {
@@ -20,7 +20,7 @@ in
           {
             authorizedKeys              =
             {
-              keyFiles                  =   [ ./public/user.ssh ];
+              keyFiles                  =   [ ../public/user.ssh  ];
             };
           };
           shell                         =   pkgs.zsh;

@@ -1,6 +1,6 @@
 let
-  this                                  =   import  ./this.nix;
-  accounts                              =   import  ./secret/mail.nix;
+  this                                  =   import  ../this.nix;
+  accounts                              =   import  ../secret/mail.nix;
 in
   { ... }:
   {
@@ -25,7 +25,7 @@ in
       enableManageSieve                 =   true;
       enablePop3                        =   true;
       enablePop3Ssl                     =   true;
-      fqdn                              =   "${this.domain}";
+      fqdn                              =   this.domain;
       localDnsResolver                  =   false;
       loginAccounts                     =   accounts;
       rejectRecipients                  =   [ ];
