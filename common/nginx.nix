@@ -5,7 +5,6 @@ let
     add_header Cache-Control              $cacheable_types;
     add_header Feature-Policy             "accelerometer none; camera none; geolocation none; gyroscope none; magnetometer none; microphone none; payment none; usb none;";
     add_header Referrer-Policy            "no-referrer-when-downgrade"                                    always;
-    add_header Server                     "sba";
     add_header Strict-Transport-Security  $hsts_header                                                    always;
     add_header X-Content-Type-Options     "nosniff";
     add_header X-Frame-Options            "SAMEORIGIN";

@@ -3,11 +3,12 @@ let
   hostName                              =   "aleph";
   ipv4                                  =   "95.217.131.201";
   ipv6range                             =   "2a01:4f9:c010:6bf5:";
+  legacyTLS                             =   true;
+  userName                              =   "sivizius";
 in
   {
     hostDomain                          =   "${hostName}.${domain}";
     ipv6                                =   "${ipv6range}:23";
-    legacyTLS                           =   true;
     ports                               =
     {
       exporters                         =
@@ -20,6 +21,5 @@ in
       grafana                           =   3001;
       prometheus                        =   9090;
     };
-    userName                            =   "sivizius";
-    inherit domain hostName ipv4 ipv6range;
+    inherit domain hostName ipv4 ipv6range legacyTLS userName;
   }
