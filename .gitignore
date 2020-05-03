@@ -1,4 +1,4 @@
 *~
 *.save
 *.swp
-secret/
+*/secret/

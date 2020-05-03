@@ -1,0 +1,101 @@
+IMAPAccount           alexandershuraborodin@gmail.com
+Host                  imap.gmail.com
+User                  alexandershuraborodin@gmail.com
+PassCmd               "pass email/alexandershuraborodin@gmail.com"
+SSLType               IMAPS
+CertificateFile       /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore             alexandershuraborodin@gmail.com-remote
+Account               alexandershuraborodin@gmail.com
+
+MaildirStore          alexandershuraborodin@gmail.com-local
+SubFolders            Legacy
+Path                  ~/E-Mails/alexandershuraborodin@gmail.com/
+Inbox                 ~/E-Mails/alexandershuraborodin@gmail.com/INBOX
+
+Channel               alexandershuraborodin@gmail.com-local
+Master                :alexandershuraborodin@gmail.com-remote:
+Slave                 :alexandershuraborodin@gmail.com-local:
+Patterns              * !"[Gmail]/.Important" "[Gmail]/.All Mail"
+Create                Both
+SyncState             *
+
+IMAPAccount           sivizius@ohai.su
+Host                  mail.fnordserver.net
+User                  sivizius@ohai.su
+PassCmd               "pass email/sivizius@ohai.su"
+SSLType               IMAPS
+
+IMAPStore             sivizius@ohai.su-remote
+Account               sivizius@ohai.su
+
+MaildirStore          sivizius@ohai.su-local
+Path                  ~/E-Mails/sivizius@ohai.su/
+Inbox                 ~/E-Mails/sivizius@ohai.su/INBOX
+
+Channel               sivizius@ohai.su-local
+Master                :sivizius@ohai.su-remote:
+Slave                 :sivizius@ohai.su-local:
+Patterns              *
+Create                Both
+SyncState             *
+
+IMAPAccount           sivizius@sivizius.eu
+Host                  sivizius.eu
+User                  sivizius@sivizius.eu
+PassCmd               "pass email/sivizius@sivizius.eu"
+SSLType               IMAPS
+
+IMAPStore             sivizius@sivizius.eu-remote
+Account               sivizius@sivizius.eu
+
+MaildirStore          sivizius@sivizius.eu-local
+Path                  ~/E-Mails/sivizius@sivizius.eu/
+Inbox                 ~/E-Mails/sivizius@sivizius.eu/INBOX
+
+Channel               sivizius@sivizius.eu-local
+Master                :sivizius@sivizius.eu-remote:
+Slave                 :sivizius@sivizius.eu-local:
+Patterns              *
+Create                Both
+SyncState             *
+
+IMAPAccount           root@sivizius.eu
+Host                  sivizius.eu
+User                  root@sivizius.eu
+PassCmd               "pass email/root@sivizius.eu"
+SSLType               IMAPS
+
+IMAPStore             root@sivizius.eu-remote
+Account               root@sivizius.eu
+
+MaildirStore          root@sivizius.eu-local
+Path                  ~/E-Mails/root@sivizius.eu/
+Inbox                 ~/E-Mails/root@sivizius.eu/INBOX
+
+Channel               root@sivizius.eu-local
+Master                :root@sivizius.eu-remote:
+Slave                 :root@sivizius.eu-local:
+Patterns              *
+Create                Both
+SyncState             *
+
+IMAPAccount           sebastian.walz@s2015.tu-chemnitz.de
+Host                  mailbox.hrz.tu-chemnitz.de
+User                  sewal
+PassCmd               "pass email/sebastian.walz@s2015.tu-chemnitz.de | kinit sewal; pass email/sebastian.walz@s2015.tu-chemnitz.de"
+SSLType               IMAPS
+
+IMAPStore             sebastian.walz@s2015.tu-chemnitz.de-remote
+Account               sebastian.walz@s2015.tu-chemnitz.de
+
+MaildirStore          sebastian.walz@s2015.tu-chemnitz.de-local
+Path                  ~/E-Mails/sebastian.walz@s2015.tu-chemnitz.de/
+Inbox                 ~/E-Mails/sebastian.walz@s2015.tu-chemnitz.de/INBOX
+
+Channel               sebastian.walz@s2015.tu-chemnitz.de-local
+Master                :sebastian.walz@s2015.tu-chemnitz.de-remote:
+Slave                 :sebastian.walz@s2015.tu-chemnitz.de-local:
+Patterns              * INBOX !"Templates" "sent"
+Create                Both
+SyncState             *

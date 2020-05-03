@@ -1,0 +1,9 @@
+set   folder                            =   "~/E-Mails/alexandershuraborodin@gmail.com/"
+set   spoolfile                         =   +INBOX
+unset record
+unmailboxes                             *
+mailboxes                               `find ~/E-Mails/alexandershuraborodin@gmail.com/ -maxdepth 1 -mindepth 1 -printf "+%P "`
+set   realname                          =   "Alexander Shura Borodin"
+set   from                              =   "alexandershuraborodin@gmail.com"
+set   signature                         =   "fortune |"
+macro compose                           y   ":source /etc/nixos/mail/$from-account<enter><send-message>" "ask for password, if necessary and send the message"

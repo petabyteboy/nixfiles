@@ -1,0 +1,9 @@
+set   folder                            =   "~/E-Mails/sebastian.walz@s2015.tu-chemnitz.de/"
+set   spoolfile                         =   +INBOX
+set   record                            =   +Sent
+unmailboxes                             *
+mailboxes                               `find ~/E-Mails/sebastian.walz@s2015.tu-chemnitz.de/ -maxdepth 1 -mindepth 1 -printf "+%P "`
+set   realname                          =   "Sebastian Walz"
+set   from                              =   "sebastian.walz@s2015.tu-chemnitz.de"
+set   signature                         =   "echo 'Mitglied im Fachschaftsrat Chemie\nMitglied der Studienkommission Bachelor/Master Chemie' |"
+macro compose                           y   ":source /etc/nixos/mail/$from-account<enter><send-message>" "ask for password, if necessary and send the message"

@@ -1,32 +1,38 @@
 let
-  this                                  =   import  ../this.nix;
+  self                                  =   import  ./self.nix;
 in
   { config, ... }:
   {
     imports                             =
     [
       ./hardware.nix
-      ../common/blog.nix
+      ./networking.nix
+
+      # Applications
+      ../application/files.nix
+      ../application/nano/default.nix
+      ../application/htop/default.nix
+      ../application/processes.nix
+      ../application/ranger/default.nix
+      ../application/sync.nix
+      ../application/terminal.nix
+      ../application/zsh.nix
+
+      # Common
+      ../common/acme.nix
       ../common/boot.nix
       ../common/environment.nix
-      ../common/gitea.nix
-      ../common/mail.nix
-      ../common/monitoring.nix
+      ../common/git.nix
+      ../common/initrd.nix
       ../common/networking.nix
-      ../common/nginx.nix
-      ../common/packages.nix
-      ../common/programs.nix
+      ../common/system.nix
       ../common/users.nix
-    ];
-    
-    nix                                 =
-    {
-      gc                                =
-      {
-        automatic                       =   true;
-        options                         =   "--delete-older-than 14d";
-      };
-    };
 
-    system.stateVersion                 =   "20.03";
+      # Services
+      ../service/blog.nix
+      ../service/gitea.nix
+      ../service/mail.nix
+      ../service/monitoring.nix
+      ../service/nginx.nix
+    ];
   }

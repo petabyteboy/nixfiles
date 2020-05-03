@@ -1,0 +1,6 @@
+set   use_from                          =   yes
+
+
+set   smtp_url                          =   "smtp://$from@localhost:7659"
+set   smtp_pass                         =   "`pass email/sivizius@mail.i2p`"
+set   pop_host                          =   "pop://sivizius:$smtp_pass@localhost:7660"

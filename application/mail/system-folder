@@ -1,0 +1,9 @@
+set   folder                            =   "~/E-Mails/"
+unset spoolfile
+unset record
+unmailboxes                             *
+mailboxes                               `find ~/E-Mails/ -maxdepth 1 -mindepth 1 -type d -printf "+%P/INBOX "`
+mailboxes                               +system
+unhook                                  account-hook
+macro compose                           y   ":source /etc/nixos/mail/$from-account<enter><send-message>" "ask for password, if necessary and send the message"
+exec  check-stats

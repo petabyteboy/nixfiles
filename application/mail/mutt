@@ -1,0 +1,56 @@
+source "/etc/nixos/mail/colours"
+set   folder                            =   "~/E-Mails/"
+set   header_cache                      =   "~/.cache/mutt"
+set   mask                              =   ""
+set   date_format                       =   "%Y-%m-%d"
+set   sort                              =   reverse-date-received
+set   beep_new
+set   sidebar_visible                   =   yes
+
+set   crypt_autosign                    =   yes
+
+set   pgp_replyencrypt
+set   pgp_replysign
+set   pgp_replysignencrypted
+set   pgp_show_unusable                 =   no
+
+set   pipe_decode                       =   yes
+macro pager       <f5>      "|rg -o --color=never '((ftp|https?)://|www\.)(\\\\ |[^ ])+( |$)'|less<enter>"                  "Lacy grep all URLs"
+macro pager       <f6>      "| w3m -T text/html<enter>"                                                                     "View HTML-Mails"
+
+set   sidebar_sort_method               =   alpha
+set   sidebar_format                    =   "%B%?F? [%F]?%* %?N?%N/?%S"
+bind  index,pager >                     sidebar-open
+bind  index,pager <                     sidebar-toggle-visible
+bind  index,pager <F73>                 sidebar-prev
+bind  index,pager <F72>                 sidebar-next
+bind  index,pager <S-Right>             sidebar-next-new
+bind  index,pager <S-Left>              sidebar-prev-new
+bind  index,pager <S-Prev>              sidebar-page-up
+bind  index,pager <S-Next>              sidebar-page-down
+bind  index,pager +                     check-stats
+#exec  check-stats
+
+mailboxes                               `find ~/E-Mails/ -maxdepth 1 -mindepth 1 -type d -printf "+%P/INBOX "`
+
+#folder-hook                 "~/E-Mails/"                                          "source /etc/nixos/mail/system-folder"
+folder-hook                 "~/E-Mails/root@sivizius.eu/"                         "source /etc/nixos/mail/root@sivizius.eu-folder"
+folder-hook                 "~/E-Mails/root@sivizius.eu/INBOX"                    "push '<enter-command>unset wait_key<enter>!mbsync -q root@sivizius.eu-local&<enter>:echo \"Sync root@sivizius.eu\"<enter>'"
+folder-hook                 "~/E-Mails/sivizius@sivizius.eu/"                     "source /etc/nixos/mail/sivizius@sivizius.eu-folder"
+folder-hook                 "~/E-Mails/sivizius@sivizius.eu/INBOX"                "push '<enter-command>unset wait_key<enter>!mbsync -q sivizius@sivizius.eu-local&<enter>:echo \"Sync sivizius@sivizius.eu\"<enter>'"
+folder-hook                 "~/E-Mails/sivizius@ohai.su/"                         "source /etc/nixos/mail/sivizius@ohai.su-folder"
+folder-hook                 "~/E-Mails/sivizius@ohai.su/INBOX"                    "push '<enter-command>unset wait_key<enter>!mbsync -q sivizius@ohai.su-local&<enter>:echo \"Sync sivizius@ohai.su\"<enter>'"
+folder-hook                 "~/E-Mails/sebastian.walz@s2015.tu-chemnitz.de/"      "source /etc/nixos/mail/sebastian.walz@s2015.tu-chemnitz.de-folder"
+folder-hook                 "~/E-Mails/sebastian.walz@s2015.tu-chemnitz.de/INBOX" "push '<enter-command>unset wait_key<enter>!mbsync -q sebastian.walz@s2015.tu-chemnitz.de-local&<enter>:echo \"Sync sebastian.walz@s2015.tu-chemnitz.de\"<enter>'"
+folder-hook                 "~/E-Mails/alexandershuraborodin@gmail.com/"          "source /etc/nixos/mail/alexandershuraborodin@gmail.com-folder"
+folder-hook                 "~/E-Mails/alexandershuraborodin@gmail.com/INBOX"     "push '<enter-command>unset wait_key<enter>!mbsync -q alexandershuraborodin@gmail.com-local&<enter>:echo \"Sync alexandershuraborodin@gmail.com\"<enter>'"
+#folder-hook                 "~/E-Mails/sivizius@mail.i2p/"                        "source /etc/nixos/mail/sivizius@mail.i2p-folder"
+
+macro index       <f5>      "<enter-command>unset wait_key<enter>!mbsync -a > /dev/null&<enter>:echo 'Sync All Mailboxes'<enter>"               "Sync Mailboxes"
+macro index       <f6>      ":echo 'Hello World'" "Say Hello World"
+
+macro index       <f25>     "<change-folder>~/E-Mails/sivizius@sivizius.eu/INBOX<enter>"                                                        "sivizius@sivizius.eu"
+macro index       <f26>     "<change-folder>~/E-Mails/root@sivizius.eu/INBOX<enter>"                                                            "root@sivizius.eu"
+macro index       <f27>     "<change-folder>~/E-Mails/sivizius@ohai.su/INBOX<enter>"                                                            "sivizius@ohai.su"
+macro index       <f28>     "<change-folder>~/E-Mails/sebastian.walz@s2015.tu-chemnitz.de/INBOX<enter>"                                         "sebastian.walz@s2015.tu-chemnitz.de"
+macro index       <f29>     "<change-folder>~/E-Mails/alexandershuraborodin@gmail.com/INBOX<enter>"                                             "alexandershuraborodin@gmail.com"

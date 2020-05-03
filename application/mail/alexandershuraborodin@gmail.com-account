@@ -1,0 +1,5 @@
+set   use_from                          =   yes
+set   ssl_force_tls                     =   yes
+set   ssl_starttls                      =   yes
+set   smtp_url                          =   "smtps://$from@smtp.gmail.com"
+set   smtp_pass                         =   "`pass email/alexandershuraborodin@gmail.com`"

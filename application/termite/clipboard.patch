@@ -1,0 +1,22 @@
+diff --git a/termite.cc b/termite.cc
+index ba1fc30..6f4edcb 100644
+--- a/termite.cc
++++ b/termite.cc
+@@ -470,6 +470,7 @@ static void update_selection(VteTerminal *vte, const select_info *select) {
+     }
+ 
+     vte_terminal_copy_primary(vte);
++    vte_terminal_copy_clipboard_format(vte, VTE_FORMAT_TEXT);
+ }
+ 
+ static void enter_command_mode(VteTerminal *vte, select_info *select) {
+@@ -1168,6 +1169,9 @@ gboolean position_overlay_cb(GtkBin *overlay, GtkWidget *widget, GdkRectangle *a
+ }
+ 
+ gboolean button_press_cb(VteTerminal *vte, GdkEventButton *event, const config_info *info) {
++    if (event->type == GDK_BUTTON_PRESS && event->button == 3) {
++        vte_terminal_paste_clipboard(vte);
++    }
+     if (info->clickable_url && event->type == GDK_BUTTON_PRESS) {
+ #if VTE_CHECK_VERSION (0, 49, 1)
+         auto match = make_unique(vte_terminal_hyperlink_check_event(vte, (GdkEvent*)event), g_free);

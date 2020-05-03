@@ -1,0 +1,50 @@
+Cut
+rename Hochwasser2013
+rename Unsorted
+mkdir Filme
+rename Moview
+rename Movies
+mkdir Documentaries
+mkdir Passwords
+mkdir Medical
+rename MRT2017
+rename 19 - Boxclub.mp3
+rename 20 - Ein Engländer, ein Franzose und ein Österreicher.mp3
+rename 21 - Widersacher.mp3
+rename 22 - Manchmal muss es weh tun.mp3
+rename 23 - TEFKABH.mp3
+rename 24 - Privatgespräch.mp3
+rename 25 - Dominik.mp3
+rename 26 - Die Korrekturen.mp3
+rename Die Kängeru-Offenbarung
+rename Das Känguru-Manifest/
+rename Die Känguru-Apokryphen
+rename Die Känguru-Offenbarung
+mkdir Music
+mkdir Audiobooks
+terminal 
+mkdir
+paste Audio
+mkdir Audio
+mkdir Executables
+mkdir Genealogy
+mkdir misc
+rename VersuchsChemie.de
+mkdir ChatLogs
+rename LAborgeräte.svg
+rename Laborgeräte.svg
+open_with gnumeric
+rename E-Mails
+open_with abiword
+mkdir ChemSa
+ut
+cut
+relink ../Projects/LuaTeX/
+rename ../../../Projects/LuaTeX/
+relink ../../../Projects/LuaTeX/
+relink ../../Projects/LuaTeX/
+delete 
+relink ../../../Projects/LuaTeX/substances.bib
+
+copy
+paste

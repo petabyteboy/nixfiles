@@ -1,5 +1,5 @@
 let
-  this                                  =   import  ../this.nix;
+  self                                  =   import  self.nix;
   master                                =   true;
   masters                               =   [ ];
   slaves                                =
@@ -23,6 +23,21 @@ in
         [
           53                            # dns
         ];
+      };
+
+      interfaces                        =
+      {
+        ens3                            =
+        {
+          ipv6.addresses                =
+          [
+            {
+              address                   =   "${self.ipv6}";
+              prefixLength              =   64;
+            }
+          ];
+          useDHCP                       =   true;
+        };
       };
     };
 
@@ -52,8 +67,8 @@ in
         zones                             =
         [
           {
-            name                          =   this.domain;
-            file                          =   "${./zones}/${this.domain}";
+            name                          =   self.domain;
+            file                          =   "${./zones}/${self.domain}";
             inherit master masters slaves;
           }
         ];
@@ -63,7 +78,7 @@ in
       {
         virtualHosts                    =
         {
-          ${this.hostDomain}            =
+          ${self.hostDomain}            =
           {
             locations                   =
             {
@@ -71,11 +86,11 @@ in
               {
                 extraConfig             =
                 ''
-                  allow ${this.ipv6range}:/64;
-                  allow ${this.ipv4};
+                  allow ${self.ipv6range}:/64;
+                  allow ${self.ipv4};
                   deny all;
                 '';
-                proxyPass               =   "http://localhost:${toString this.ports.exporters.bind}/metrics";
+                proxyPass               =   "http://localhost:${toString self.ports.exporters.bind}/metrics";
               };
             };
           };
@@ -89,7 +104,7 @@ in
           bind                          =
           {
             enable                      =   true;
-            port                        =   this.ports.exporters.bind;
+            port                        =   self.ports.exporters.bind;
           };
         };
         scrapeConfigs                   =
@@ -104,7 +119,7 @@ in
               {
                 targets                 =
                 [
-                  "${this.hostDomain}"
+                  "${self.hostDomain}"
                 ];
               }
             ];
@@ -117,27 +132,27 @@ in
     {
       services                          =
       {
-        "acme-${this.domain}"           =
+        "acme-${self.domain}"           =
         {
           after                         =   [ "bind.service"  ];
         };
-        "acme-${this.hostDomain}"       =
+        "acme-${self.hostDomain}"       =
         {
           after                         =   [ "bind.service"  ];
         };
-        "acme-blog.${this.domain}"      =
+        "acme-blog.${self.domain}"      =
         {
           after                         =   [ "bind.service"  ];
         };
-        "acme-git.${this.domain}"       =
+        "acme-git.${self.domain}"       =
         {
           after                         =   [ "bind.service"  ];
         };
-        "acme-grafana.${this.domain}"   =
+        "acme-grafana.${self.domain}"   =
         {
           after                         =   [ "bind.service"  ];
         };
-        "acme-prometheus.${this.domain}"=
+        "acme-prometheus.${self.domain}"=
         {
           after                         =   [ "bind.service"  ];
         };

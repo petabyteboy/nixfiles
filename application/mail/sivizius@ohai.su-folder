@@ -1,0 +1,9 @@
+set   folder                            =   "~/E-Mails/sivizius@ohai.su/"
+set   spoolfile                         =   +INBOX
+set   record                            =   +Sent
+unmailboxes                             *
+mailboxes                               `find ~/E-Mails/sivizius@ohai.su -maxdepth 1 -mindepth 1 -printf "+%P "`
+set   realname                          =   "sivizius"
+set   from                              =   "sivizius@ohai.su"
+set   signature                         =   "fortune |"
+macro compose                           y   ":source /etc/nixos/mail/$from-account<enter><send-message>" "ask for password, if necessary and send the message"

@@ -1,0 +1,8 @@
+unset realname
+unset from
+unset signature
+unset use_from
+unset ssl_force_tls
+unset ssl_starttls
+unset smtp_url
+unset smtp_pass

@@ -1,0 +1,5 @@
+set   use_from                          =   yes
+set   ssl_force_tls                     =   yes
+set   ssl_starttls                      =   yes
+set   smtp_url                          =   "smtps://sewal@mailbox.hrz.tu-chemnitz.de"
+set   smtp_pass                         =   "`pass email/sebastian.walz@s2015.tu-chemnitz.de | kinit sewal > /dev/null; pass email/sebastian.walz@s2015.tu-chemnitz.de`"

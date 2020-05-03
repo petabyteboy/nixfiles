@@ -1,5 +1,5 @@
 let
-  this                                  =   import  ../this.nix;
+  self                                  =   import  ./self.nix;
 in
   { pkgs, ... }:
   {
@@ -11,7 +11,7 @@ in
         {
           shell                         =   pkgs.zsh;
         };
-        "${this.userName}"              =
+        "${self.userName}"              =
         {
           extraGroups                   =   [ "wheel" ];
           initialPassword               =   "1337";
@@ -20,7 +20,7 @@ in
           {
             authorizedKeys              =
             {
-              keyFiles                  =   [ ../public/user.ssh  ];
+              keyFiles                  =   [ ../public/hetzner.ssh ];
             };
           };
           shell                         =   pkgs.zsh;

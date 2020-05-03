@@ -1,0 +1,211 @@
+# Key Aliases
+set $mod                                Mod4
+set $up                                 w
+set $left                               a
+set $down                               s
+set $right                              d
+
+# Default Programs
+set $browser                            qutebrowser
+set $htop                               termite -e htop
+set $lock                               swaylock -efu -c 000000 -i $HOME/.asserts/otter.png -s center
+set $menu                               wofi --show drun
+set $pass                               passmenu
+set $screenshooter                      'mkdir -p $HOME/.screenshots; grim $HOME/.screenshots/$(date +"%Y-%m-%dT%H:%M:%SZ%z").png'
+set $terminal                           termite
+
+# Lock Screen after … Seconds
+set $timeOutDark                        120
+set $timeOutLock                        150
+set $lightsOff                          "swaymsg 'output * dpms off'"
+set $lightsOn                           "swaymsg 'output * dpms on'"
+
+# Resize by these amounts
+set $resizeHeight                       10px
+set $resizeWidth                        10px
+
+# Whatever this is
+floating_modifier $mod                  normal
+for_window [class="^.*"] border         pixel 0
+default_border                          none
+hide_edge_borders                       both
+
+# Execute Stuff
+bindsym $mod+h                          exec $htop
+bindsym $mod+k                          exec $screenshoot
+bindsym $mod+l                          exec $lock
+bindsym $mod+p                          exec $pass
+bindsym $mod+t                          exec $terminal
+bindsym $mod+u                          exec $browser
+bindsym $mod+Escape                     exec $menu
+
+bindsym $mod+Shift+x                    kill
+bindsym $mod+Shift+c                    reload
+bindsym $mod+Shift+q                    exec swaymsg exit
+
+# Tilling
+bindsym $mod+b                          splith
+bindsym $mod+v                          splitv
+
+bindsym $mod+q                          layout stacking
+bindsym $mod+e                          layout tabbed
+bindsym $mod+y                          layout toggle split
+bindsym $mod+x                          fullscreen
+
+bindsym $mod+c                          floating toggle
+bindsym $mod+n                          focus mode_toggle
+bindsym $mod+m                          focus parent
+bindsym $mod+f                          move scratchpad
+bindsym $mod+g                          scratchpad show
+
+# Focus
+bindsym $mod+$up                        focus up
+bindsym $mod+Up                         focus up
+bindsym $mod+$left                      focus left
+bindsym $mod+Left                       focus left
+bindsym $mod+$down                      focus down
+bindsym $mod+Down                       focus down
+bindsym $mod+$right                     focus right
+bindsym $mod+Right                      focus right
+
+# Moving
+bindsym $mod+Shift+$up                  move  up
+bindsym $mod+Shift+Up                   move  up
+bindsym $mod+Shift+$left                move  left
+bindsym $mod+Shift+Left                 move  left
+bindsym $mod+Shift+$down                move  down
+bindsym $mod+Shift+Down                 move  down
+bindsym $mod+Shift+$right               move  right
+bindsym $mod+Shift+Right                move  right
+
+# Resizing
+bindsym $mod+r mode "resize"
+mode "resize"
+{
+  bindsym Return                        mode "default"
+  bindsym Escape                        mode "default"
+  bindsym $up                           resize shrink height  $resizeHeight
+  bindsym Up                            resize shrink height  $resizeHeight
+  bindsym $left                         resize shrink width   $resizeWidth
+  bindsym Left                          resize shrink width   $resizeWidth
+  bindsym $down                         resize grow   height  $resizeHeight
+  bindsym Down                          resize grow   height  $resizeHeight
+  bindsym $right                        resize grow   width   $resizeWidth
+  bindsym Right                         resize grow   width   $resizeWidth
+}
+
+# Workspaces
+bindsym $mod+F1                         workspace 0
+bindsym $mod+Shift+F1                   move container to workspace 0
+bindsym $mod+F2                         workspace 1
+bindsym $mod+Shift+F2                   move container to workspace 1
+bindsym $mod+F3                         workspace 2
+bindsym $mod+Shift+F3                   move container to workspace 2
+bindsym $mod+F4                         workspace 3
+bindsym $mod+Shift+F4                   move container to workspace 3
+bindsym $mod+F5                         workspace 4
+bindsym $mod+Shift+F5                   move container to workspace 4
+bindsym $mod+F6                         workspace 5
+bindsym $mod+Shift+F6                   move container to workspace 5
+bindsym $mod+F7                         workspace 6
+bindsym $mod+Shift+F7                   move container to workspace 6
+bindsym $mod+F8                         workspace 7
+bindsym $mod+Shift+F8                   move container to workspace 7
+bindsym $mod+F9                         workspace 8
+bindsym $mod+Shift+F9                   move container to workspace 8
+bindsym $mod+F10                        workspace 9
+bindsym $mod+Shift+F10                  move container to workspace 9
+bindsym $mod+F11                        workspace a
+bindsym $mod+Shift+F11                  move container to workspace a
+bindsym $mod+F12                        workspace b
+bindsym $mod+Shift+F12                  move container to workspace b
+bindsym $mod+1                          workspace c
+bindsym $mod+Shift+1                    move container to workspace c
+bindsym $mod+2                          workspace d
+bindsym $mod+Shift+2                    move container to workspace d
+bindsym $mod+3                          workspace e
+bindsym $mod+Shift+3                    move container to workspace e
+bindsym $mod+4                          workspace f
+bindsym $mod+Shift+4                    move container to workspace f
+bindsym $mod+5                          workspace g
+bindsym $mod+Shift+5                    move container to workspace g
+bindsym $mod+6                          workspace h
+bindsym $mod+Shift+6                    move container to workspace h
+bindsym $mod+7                          workspace i
+bindsym $mod+Shift+7                    move container to workspace i
+bindsym $mod+8                          workspace j
+bindsym $mod+Shift+8                    move container to workspace j
+bindsym $mod+9                          workspace k
+bindsym $mod+Shift+9                    move container to workspace k
+bindsym $mod+0                          workspace l
+bindsym $mod+Shift+0                    move container to workspace l
+
+# Default Workspaces
+
+#assign [class="^Chromium$"] $ws1
+# assign [class="^code-oss$"] $ws2
+#assign [class="^Signal$"] $wsF1
+#assign [class="^Riot$"] $wsF1
+#assign [class="^Mailspring$"] $wsF2
+#assign [app_id="virt-manager"] $wsF8
+#assign [class="^KeePass2$"] $wsF11
+#assign [class="^Spotify$"] $wsF12
+
+# Special Keys
+bindsym XF86AudioRaiseVolume            exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume            exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute                   exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute                exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown           exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp             exec brightnessctl set +5%
+bindsym XF86AudioPlay                   exec playerctl play-pause
+bindsym XF86AudioNext                   exec playerctl next
+bindsym XF86AudioPrev                   exec playerctl previous
+
+# Input
+input *
+{
+  pointer_accel                         0.0
+  xkb_layout                            de(basic)
+  xkb_options                           compose:caps
+  xkb_variant                           ""
+}
+
+bindsym Ctrl+Shift+F1                   input * xkb_layout de(basic)
+bindsym Ctrl+Shift+F2                   input * xkb_layout il(phonetic)
+bindsym Ctrl+Shift+F3                   input * xkb_layout bg(phonetic)
+bindsym Ctrl+Shift+F4                   input * xkb_layout gr(basic)
+bindsym Ctrl+Shift+F5                   input * xkb_layout us(basic)
+
+# Output
+output *
+{
+  bg                                    "$HOME/.asserts/Crater_Cluster.png" fill
+}
+
+# Autostart
+##  Lock Screen (at startup, so by breaking and restarting sway does not unlock)
+exec                                    $lock
+#exec --no-startup-id                    swayidle -w timeout "$timeOutDark" "$lightOff" resume "$lightsOn"
+exec                                    swayidle -w timeout 120 "swaymsg 'output * dpms off'; swaylock -efu -c 000000 -i $HOME/.asserts/otter.png -s center" resume "swaymsg 'output * dpms on'"
+
+##  Status Bar
+exec  --no-startup-id                   waybar -c $HOME/.config/waybar/config.json -s $HOME/.config/waybar/style.css
+
+##  Applications
+exec                                    firefox
+for_window [app_id="^firefox$"]         move container to workspace 0
+exec                                    termite -t ranger  -e ranger
+for_window [title="^ranger$"]           move container to workspace 1
+exec                                    termite -t neomutt -e neomutt
+for_window [title="^neomutt$"]          move container to workspace 2
+exec                                    telegram-desktop
+for_window [app_id="^telegramdesktop$"] move container to workspace 3
+exec                                    dino
+for_window [app_id="^dino$"]            move container to workspace 3
+exec                                    Discord
+for_window [class="^discord$"]          move container to workspace 3
+exec                                    atom
+for_window [class="^Mumble$"]           move container to workspace 3
+for_window [class="^Atom$"]             move container to workspace 4
+exec                                    swaymsg "workspace 3; layout tabbed"
